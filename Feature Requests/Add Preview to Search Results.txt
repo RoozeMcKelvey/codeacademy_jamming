@@ -28,6 +28,7 @@ In order to display a link to the preview, the following steps will be executed:
 import PreviewButton from './preview_button.png';
 3. Add an href to the rendered <h3> line before displaying the track name:
 <a href={this.props.track.preview} target='_blank'><img src={PreviewButton} height='18px' /></a>
+
 CAVEATS
 UX/UI Issue
 This approach opens the preview in a new tab/window in order to not lose the search results. However, it may not be clear to the user what is happening. A second iteration of this feature would open the preview in a smaller pop-up window, following a user interface that is much more in line with user expectations.
