@@ -1,0 +1,33 @@
+﻿Feature Request: Add Preview to Search Results
+February 22, 2019
+
+
+OBJECTIVE
+Add the ability to listen to a preview of the tracks in the search results.
+BACKGROUND 
+Since the Jamming search includes songs, artists, and albums, many of the results will not match users’ expectations.  Likewise, many songs have the same name and simply seeing a list of results makes selecting the desired song challenging.
+Adding a preview link for the results in Jamming will help users determine which search result matches the track they are seeking. 
+TECHNICAL DESIGN
+Spotify includes a “preview_url” endpoint, which is a string containing the URL to a 30 second preview of the track. This would need to be added to the following files.
+Spotify.js
+In order to access this endpoint, it needs to be added as a property of the track mapping code (bolded below for emphasis):
+return jsonResponse.tracks.items.map(track => ({
+                id: track.id,
+                name: track.name,
+                artist: track.artists[0].name,
+                album: track.album.name,
+                preview: track.preview_url,
+                uri: track.uri
+        }));
+
+
+Track.js
+In order to display a link to the preview, the following steps will be executed:
+1. Add a ‘preview_button.png’ file to the Track folder.
+2. Import the image in the Track.js file: 
+import PreviewButton from './preview_button.png';
+3. Add an href to the rendered <h3> line before displaying the track name:
+<a href={this.props.track.preview} target='_blank'><img src={PreviewButton} height='18px' /></a>
+CAVEATS
+UX/UI Issue
+This approach opens the preview in a new tab/window in order to not lose the search results. However, it may not be clear to the user what is happening. A second iteration of this feature would open the preview in a smaller pop-up window, following a user interface that is much more in line with user expectations.

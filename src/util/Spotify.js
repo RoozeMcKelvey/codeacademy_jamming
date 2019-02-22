@@ -1,8 +1,7 @@
 const spotifyAuthorizeURIBase = 'https://accounts.spotify.com/authorize'
 const spotifyAPIURIBase = 'https://api.spotify.com/v1/'
 const clientId = '57d184dd4938488ba98ea65fdbbf0580'
-//const redirectURI = 'http://localhost:3000/';
-const redirectURI = 'centerpoint.surge.sh';
+const redirectURI = 'http://localhost:3000/';
 
 let accessToken
 
@@ -44,6 +43,7 @@ const Spotify = {
 				name: track.name,
 				artist: track.artists[0].name,
 				album: track.album.name,
+				preview:track.preview_url,
 				uri: track.uri
 			}));
 		});
